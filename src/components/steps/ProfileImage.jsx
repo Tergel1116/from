@@ -8,7 +8,7 @@ export const ProfileImage = () => {
     <div>
       <Header />
       <div className="mt-[30px]">
-        <DateInput name="Date of birth" />
+        <DateInput labelName="zail " />
         <Footer />
       </div>
     </div>
