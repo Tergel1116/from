@@ -1,12 +1,12 @@
-import { isEmpty } from "./validation-utils";
+import { isEmail, isEmpty, isPhoneNumber } from "./validation-utils";
 
 export const validateStepOne = (formValues) => {
   const errors = {};
 
-  if (isEmpty(formValues.lastName)) {
+  if (isEmpty(formValues.firstName)) {
     errors.firstName = "Нэрээ оруулна уу";
   }
-  if (isEmpty(formValues.firstName)) {
+  if (isEmpty(formValues.lastName)) {
     errors.lastName = "Овгоо оруулна уу.";
   }
   if (isEmpty(formValues.username)) {
@@ -20,21 +20,61 @@ export const validateStepOne = (formValues) => {
 
 export const validateStepTwo = (formValues) => {
   const errors = {};
-  if (isEmpty(formValues.email)) {
-    errors.email = "meil ee oruul";
+
+  // EMAIL CHECK
+  if (!isEmpty(formValues.email)) {
+    if (!isEmail(formValues.email)) {
+      errors.email = "Зөв мэйл хаяг оруулна уу";
+    }
+  } else {
+    errors.email = "Мэйл хаяг оруулна уу";
   }
-  if (isEmpty(formValues.phoneNumber)) {
-    errors.phoneNumber = "dugaar ee oruul";
+
+  // PHONE NUMBER CHECK
+  if (!isEmpty(formValues.phoneNumber)) {
+    if (!isPhoneNumber(formValues.phoneNumber)) {
+      errors.phoneNumber = "8 оронтой дугаар оруулна уу.";
+    }
+  } else {
+    errors.phoneNumber = "Утасны дугаараа оруулна уу.";
   }
-  if (isEmpty(formValues.password)) {
-    errors.password = "pass ee oruul";
+
+  // PASSWORD CHECK
+  if (!isEmpty(formValues.password)) {
+    if (formValues.password.length < 6) {
+      errors.password = "Нууц үг 6 аас дээш оронтой байх ёстой!";
+    }
+  } else {
+    errors.password = "Нууц үгээ оруулна уу";
   }
-  if (isEmpty(formValues.confirmPassword)) {
-    errors.confirmPassword = "pass2 ee oruul";
+  // PASSWORD CONFIRMATION CHECK
+  if (!isEmpty(formValues.confirmPassword)) {
+    if (formValues.confirmPassword !== formValues.password) {
+      errors.confirmPassword = "Таны оруулсан нууц үг таарахгүй байна.";
+    }
+  } else {
+    errors.confirmPassword = "Нууц үгээ давтаж оруулна уу";
   }
+
+  const isValid = Object.keys(errors).length === 0;
+  return { errors, isValid };
 };
-const isValid = Object.keys(errors).length === 0;
 
-return { errors, isValid };
+export const validateStepThree = (formValues) => {
+  const errors = {};
 
-export const validateStepThree = (formValues) => {};
+  // if (isEmpty(formValues.birthday)) {
+  //   errors.birthday = "tursun udruu oruul";
+  // }
+
+  if (!isEmpty(formValues.birthday)) {
+    if (formValues.birthday > 18) {
+      errors.birthday = "18 hureeguu bn";
+    }
+  } else {
+    errors.birthday = "tursun udruu oruul";
+  }
+
+  const isValid = Object.keys(errors).length === 0;
+  return { errors, isValid };
+};

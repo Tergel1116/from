@@ -4,12 +4,19 @@ import { Label } from ".";
 {
   /* <Label labelName={name} />; */
 }
-export const Input = ({ placeholder, name, labelName, handleChange }) => {
+export const Input = ({
+  placeholder,
+  name,
+  labelName,
+  handleChange,
+  value,
+}) => {
   return (
     <div>
       <Label name={labelName} />
 
       <input
+        value={value}
         className="h-[44px] w-[416px]  rounded-[8px]  border-[#CBD5E1] active:border-[#0CA5E9] border-[1px] p-[12px]"
         type="text"
         placeholder={placeholder}

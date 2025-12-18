@@ -9,6 +9,9 @@ export const ContactInfo = ({
   formErrors,
   setFormErrors,
   handleNext,
+  handlePrevious,
+  step,
+  steps,
 }) => {
   const handleSubmit = () => {
     const { errors, isValid } = validateStepTwo(formValues);
@@ -19,35 +22,58 @@ export const ContactInfo = ({
       handleNext();
     }
   };
+
   return (
     <div className="flex flex-col gap-[20px]">
       <Header />
 
-      <Input name="email" labelName="Email" placeholder="Your email" />
-      <p className="text-red-600 text-[12px]">{formErrors.firstName}</p>
-      <Input
-        name="phoneNumber"
-        labelName="Phone number"
-        placeholder="Your phone number"
-      />
-      <p className="text-red-600 text-[12px]">{formErrors.firstName}</p>
-      <Pass name="password" labelName="Password" placeholder="Your password" />
-      <p className="text-red-600 text-[12px]">{formErrors.firstName}</p>
-      <Pass
-        name="confirmPassword"
-        labelName="Confirm password"
-        placeholder="Confirm  password"
-      />
-      <p className="text-red-600 text-[12px]">{formErrors.firstName}</p>
-      {/* 
-      <input
-        className="h-[44px] w-[416px]  rounded-[8px]  border-[#CBD5E1] active:border-[#0CA5E9] border-[1px] p-[12px]"
-        type="password"
-        name="Confirm password"
-        placeholder="Confirm password"
-      /> */}
+      <div>
+        <Input
+          value={formValues.email}
+          name="email"
+          labelName="Email"
+          placeholder="Your email"
+          handleChange={handleChange}
+        />
+        <p className="text-red-600 text-[12px]">{formErrors.email}</p>
+      </div>
+      <div>
+        <Input
+          value={formValues.phoneNumber}
+          name="phoneNumber"
+          labelName="Phone number"
+          placeholder="Your phone number"
+          handleChange={handleChange}
+        />
+        <p className="text-red-600 text-[12px]">{formErrors.phoneNumber}</p>
+      </div>
+      <div>
+        <Pass
+          value={formValues.password}
+          name="password"
+          labelName="Password"
+          placeholder="Your password"
+          handleChange={handleChange}
+        />
+        <p className="text-red-600 text-[12px]">{formErrors.password}</p>
+      </div>
+      <div>
+        <Pass
+          value={formValues.confirmPassword}
+          name="confirmPassword"
+          labelName="Confirm password"
+          placeholder="Confirm  password"
+          handleChange={handleChange}
+        />
+        <p className="text-red-600 text-[12px]">{formErrors.confirmPassword}</p>
+      </div>
 
-      <Footer />
+      <Footer
+        handleSubmit={handleSubmit}
+        handlePrevious={handlePrevious}
+        step={step}
+        steps={steps}
+      />
     </div>
   );
 };

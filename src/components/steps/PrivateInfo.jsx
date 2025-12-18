@@ -9,7 +9,10 @@ export const PrivateInfo = ({
   formValues,
   formErrors,
   setFormErrors,
+  steps,
+  step,
   handleNext,
+  handlePrevious,
 }) => {
   const handleSubmit = () => {
     const { errors, isValid } = validateStepOne(formValues);
@@ -20,7 +23,6 @@ export const PrivateInfo = ({
       handleNext();
     }
   };
-  // console.log(formErrors);
 
   return (
     <div className="flex flex-col gap-[20px]">
@@ -28,6 +30,7 @@ export const PrivateInfo = ({
 
       <div>
         <Input
+          value={formValues.firstName}
           name="firstName"
           labelName="First name"
           placeholder="Your first name"
@@ -38,6 +41,7 @@ export const PrivateInfo = ({
 
       <div>
         <Input
+          value={formValues.lastName}
           name="lastName"
           labelName="Last name"
           placeholder="Your last name"
@@ -47,6 +51,7 @@ export const PrivateInfo = ({
       </div>
       <div>
         <Input
+          value={formValues.username}
           name="username"
           labelName="Username"
           placeholder="Your username"
@@ -54,14 +59,13 @@ export const PrivateInfo = ({
         />
         <p className="text-red-600 text-[12px]">{formErrors.username}</p>
       </div>
-      <button
-        onClick={handleSubmit}
-        className="py-1 px-2 bg-amber-500 hover:cursor-pointer"
-      >
-        Submit
-      </button>
 
-      <Footer />
+      <Footer
+        handleSubmit={handleSubmit}
+        step={step}
+        handlePrevious={handlePrevious}
+        steps={steps}
+      />
     </div>
   );
 };
