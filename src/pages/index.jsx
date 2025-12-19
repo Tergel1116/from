@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   ContactInfo,
   PrivateInfo,
@@ -14,13 +14,16 @@ import { motion } from "framer-motion";
 import { initialValues } from "@/components/constants/initial";
 
 export const Index = () => {
-  const [step, setstep] = useState(0);
+  const [step, setstep] = useState(2);
 
   // STEPS FUNCTION
   const steps = [PrivateInfo, ContactInfo, ProfileImage, Success];
   const Container = steps[step];
 
   // const Container = [ContactInfo, PrivateInfo, ProfileImage, Success][step];
+
+  // USEREF
+  const inputRef = useRef();
 
   // ERROR MESSAGE FUNCTION
   const [formValues, setFormValues] = useState(initialValues);
@@ -49,6 +52,9 @@ export const Index = () => {
     }
   };
 
+  // DRAG AND DROP FUNCTION STATE
+  const [isDragging, setIsDragging] = useState(false);
+
   return (
     <div className={inter.className}>
       <div className="h-screen w-screen bg-gray-100 flex items-center justify-center">
@@ -69,6 +75,10 @@ export const Index = () => {
             handlePrevious={handlePrevious}
             step={step}
             steps={steps.length}
+            inputRef={inputRef}
+            isDragging={isDragging}
+            setIsDragging={setIsDragging}
+            setFormValues={setFormValues}
           />
         </motion.div>
       </div>

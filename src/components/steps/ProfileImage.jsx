@@ -13,6 +13,10 @@ export const ProfileImage = ({
   formValues,
   formErrors,
   setFormErrors,
+  inputRef,
+  isDragging,
+  setIsDragging,
+  setFormValues,
 }) => {
   const handleSubmit = () => {
     const { errors, isValid } = validateStepThree(formValues);
@@ -32,8 +36,15 @@ export const ProfileImage = ({
           value={formValues.birthday}
           handleChange={handleChange}
           error={formErrors.birthday}
+          inputRef={inputRef}
+          isDragging={isDragging}
+          setIsDragging={setIsDragging}
+          formValues={formValues}
+          setFormValues={setFormValues}
+          profileError={formErrors.profile}
+          setFormErrors={setFormErrors}
         />
-        <p className="text-red-600 text-[12px]">{formErrors.birthday}</p>
+        {/* <p className="text-red-600 text-[12px]">{formErrors.birthday}</p> */}
       </div>
       <Footer
         handleSubmit={handleSubmit}

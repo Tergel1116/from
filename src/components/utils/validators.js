@@ -69,12 +69,14 @@ export const validateStepThree = (formValues) => {
 
   if (!isEmpty(formValues.birthday)) {
     if (formValues.birthday > 18) {
-      errors.birthday = "18 hureeguu bn";
+      errors.birthday = "Та 18 нас хүрсэн байх ёстой";
     }
   } else {
-    errors.birthday = "tursun udruu oruul";
+    errors.birthday = "Төрсөн он сараа оруулна уу";
   }
-
+  if (isEmpty(formValues.profile)) {
+    errors.profile = "Файл хоосон байж болохгүй";
+  }
   const isValid = Object.keys(errors).length === 0;
   return { errors, isValid };
 };
