@@ -132,7 +132,6 @@ export const DateInput = ({
               </>
             )}
           </div>
-
           {imageUrl && (
             <button
               onClick={clearImage}
@@ -141,11 +140,9 @@ export const DateInput = ({
               X
             </button>
           )}
-
           {profileError && (
             <p className="text-red-600 text-[12px]">{profileError}</p>
           )}
-
           <input
             hidden
             type="file"
@@ -158,3 +155,8 @@ export const DateInput = ({
     </div>
   );
 };
+
+// div
+// div
+// div
+// div
