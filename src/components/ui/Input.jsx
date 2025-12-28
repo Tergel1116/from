@@ -23,6 +23,7 @@ export const Input = ({
         name={name}
         onChange={handleChange}
       />
+
       {/* <input type="password" /> */}
     </div>
   );

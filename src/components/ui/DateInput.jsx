@@ -16,6 +16,7 @@ export const DateInput = ({
   setIsDragging,
   profileError,
   setFormErrors,
+  errors,
 }) => {
   const handleBrowserClick = () => {
     if (inputRef.current) {
@@ -49,7 +50,8 @@ export const DateInput = ({
   const handlePicture = (event) => {
     // const uploadedImage = event.target.files(0);
     const uploadedImage = Array.from(event.target.files).at(0);
-
+    // setFormErrors((previous) => ({ ...previous, [name]: "", errors: "" }));
+    setFormErrors((previous) => ({ ...previous, profile: "" }));
     handleUploadImage(uploadedImage);
   };
 
@@ -60,6 +62,12 @@ export const DateInput = ({
 
     setFormValues((previous) => ({ ...previous, profile: "" }));
   };
+  // const handleChange = (event) => {
+  //   const { value, name } = event.target;
+
+  //   setFormValues((previous) => ({ ...previous, [name]: value }));
+  //   setFormErrors((previous) => ({ ...previous, [name]: "" }));
+  // };
   console.log(formValues);
 
   const handleDrop = (event) => {
@@ -68,7 +76,7 @@ export const DateInput = ({
     const uploadedImage = Array.from(event.dataTransfer.files).at(0);
 
     handleUploadImage(uploadedImage);
-    setFormErrors((previous) => ({ ...previous, [profile]: "" }));
+    setFormErrors((previous) => ({ ...previous, profile: "" }));
     setIsDragging(false);
   };
 

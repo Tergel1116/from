@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Footer, Header } from "../parts";
 import { Input, Label } from "../ui";
 
 import { validateStepOne } from "../utils/validators";
+
+import {
+  saveFormValues,
+  retrieveFormValues,
+} from "@/components/utils/localStorage";
 
 export const PrivateInfo = ({
   handleChange,
@@ -13,6 +18,7 @@ export const PrivateInfo = ({
   step,
   handleNext,
   handlePrevious,
+  setFormValues,
 }) => {
   const handleSubmit = () => {
     const { errors, isValid } = validateStepOne(formValues);
@@ -21,8 +27,15 @@ export const PrivateInfo = ({
 
     if (isValid) {
       handleNext();
+      saveFormValues(formValues, step);
     }
   };
+  useEffect(() => {
+    const valueFromLocalStorage = retrieveFormValues();
+    if (valueFromLocalStorage) {
+      setFormValues(valueFromLocalStorage);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col gap-[20px]">

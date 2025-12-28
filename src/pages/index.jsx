@@ -6,7 +6,13 @@ import {
   Success,
 } from "@/components/steps";
 import { Inter } from "next/font/google";
+import {
+  retrieveFormValues,
+  saveFormValues,
+} from "@/components/utils/localStorage";
 const inter = Inter({ subsets: ["latin"] });
+
+import { useEffect } from "react";
 
 import { AnimatePresence } from "framer-motion";
 
@@ -14,7 +20,19 @@ import { motion } from "framer-motion";
 import { initialValues } from "@/components/constants/initial";
 
 export const Index = () => {
-  const [step, setstep] = useState(2);
+  const [step, setstep] = useState(0);
+
+  useEffect(() => {
+    const saved = retrieveFormValues();
+
+    if (saved) {
+      setFormValues(saved);
+
+      if (saved.step !== undefined) {
+        setstep(saved.step); //
+      }
+    }
+  }, []);
 
   // STEPS FUNCTION
   const steps = [PrivateInfo, ContactInfo, ProfileImage, Success];
@@ -41,14 +59,18 @@ export const Index = () => {
   // NEXT PAGE , CONTINUE BUTTON FUNCTION
   const handleNext = () => {
     if (step < steps.length - 1) {
-      setstep(step + 1);
+      const nextStep = step + 1;
+      setstep(nextStep);
+      saveFormValues(formValues, nextStep);
     }
   };
 
   // PREVIOUS PAGE, BACK BUTTON FUNCTION
   const handlePrevious = () => {
     if (step > 0) {
-      setstep(step - 1);
+      const prevStep = step - 1;
+      setstep(prevStep);
+      saveFormValues(formValues, prevStep);
     }
   };
 

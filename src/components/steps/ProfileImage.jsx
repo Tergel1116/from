@@ -1,9 +1,13 @@
 import React from "react";
-
+import { useState, useEffect } from "react";
 import { Header, Footer } from "@/components/parts";
 import { DateInput } from "@/components/ui";
 import { validateStepThree } from "../utils/validators";
-
+import {
+  saveFormValues,
+  retrieveFormValues,
+  deleteFormValue,
+} from "@/components/utils/localStorage";
 export const ProfileImage = ({
   handleChange,
   handlePrevious,
@@ -24,9 +28,22 @@ export const ProfileImage = ({
     setFormErrors(errors);
 
     if (isValid) {
+      saveFormValues(formValues, step);
+      deleteFormValue(formValues, step);
       handleNext();
     }
   };
+  // useEffect(() => {
+  //   const valueFromLocalStorage = retrieveFormValues();
+  // }, []);
+
+  useEffect(() => {
+    const valueFromLocalStorage = retrieveFormValues();
+    if (valueFromLocalStorage) {
+      setFormValues(valueFromLocalStorage);
+    }
+  }, []);
+
   return (
     <div>
       <Header />
@@ -43,6 +60,7 @@ export const ProfileImage = ({
           setFormValues={setFormValues}
           profileError={formErrors.profile}
           setFormErrors={setFormErrors}
+          // errors={errors}
         />
         {/* <p className="text-red-600 text-[12px]">{formErrors.birthday}</p> */}
       </div>

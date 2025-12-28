@@ -3,6 +3,13 @@ import { Label, Input, Pass, ErrorMessage, Header, Footer } from "@/components";
 
 import { validateStepTwo } from "../utils/validators";
 
+import { useState, useEffect } from "react";
+
+import {
+  saveFormValues,
+  retrieveFormValues,
+} from "@/components/utils/localStorage";
+
 export const ContactInfo = ({
   handleChange,
   formValues,
@@ -12,6 +19,7 @@ export const ContactInfo = ({
   handlePrevious,
   step,
   steps,
+  setFormValues,
 }) => {
   const handleSubmit = () => {
     const { errors, isValid } = validateStepTwo(formValues);
@@ -20,8 +28,19 @@ export const ContactInfo = ({
 
     if (isValid) {
       handleNext();
+      saveFormValues(formValues, step);
     }
   };
+  // useEffect(() => {
+  //   const valueFromLocalStorage = retrieveFormValues();
+  // }, []);
+
+  useEffect(() => {
+    const valueFromLocalStorage = retrieveFormValues();
+    if (valueFromLocalStorage) {
+      setFormValues(valueFromLocalStorage);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col gap-[20px]">
