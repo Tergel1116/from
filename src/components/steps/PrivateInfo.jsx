@@ -82,3 +82,4 @@ export const PrivateInfo = ({
     </div>
   );
 };
+export default PrivateInfo;

@@ -22,14 +22,32 @@ import { initialValues } from "@/components/constants/initial";
 export const Index = () => {
   const [step, setstep] = useState(0);
 
+  // useEffect(() => {
+  //   const saved = retrieveFormValues();
+
+  //   if (saved) {
+  //     setFormValues(saved);
+
+  //     if (saved.step !== undefined) {
+  //       setstep(saved.step);
+  //     }
+  //   }
+  // }, []);
+
   useEffect(() => {
     const saved = retrieveFormValues();
 
     if (saved) {
       setFormValues(saved);
 
-      if (saved.step !== undefined) {
-        setstep(saved.step); //
+      if (
+        typeof saved.step === "number" &&
+        saved.step >= 0 &&
+        saved.step < steps.length
+      ) {
+        setstep(saved.step);
+      } else {
+        setstep(0);
       }
     }
   }, []);
@@ -76,6 +94,11 @@ export const Index = () => {
 
   // DRAG AND DROP FUNCTION STATE
   const [isDragging, setIsDragging] = useState(false);
+
+  // console.log("PrivateInfo:", PrivateInfo);
+  // console.log("ContactInfo:", ContactInfo);
+  // console.log("ProfileImage:", ProfileImage);
+  // console.log("Success:", Success);
 
   return (
     <div className={inter.className}>

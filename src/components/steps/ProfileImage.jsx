@@ -73,3 +73,4 @@ export const ProfileImage = ({
     </div>
   );
 };
+export default ProfileImage;
