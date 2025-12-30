@@ -27,4 +27,3 @@ export const Success = ({ handlePrevious }) => {
     </div>
   );
 };
-export default Success;

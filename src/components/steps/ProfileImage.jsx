@@ -28,9 +28,8 @@ export const ProfileImage = ({
     setFormErrors(errors);
 
     if (isValid) {
-      saveFormValues(formValues, step);
-      deleteFormValue(formValues, step);
       handleNext();
+      deleteFormValue();
     }
   };
   // useEffect(() => {

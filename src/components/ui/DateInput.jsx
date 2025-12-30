@@ -68,7 +68,6 @@ export const DateInput = ({
   //   setFormValues((previous) => ({ ...previous, [name]: value }));
   //   setFormErrors((previous) => ({ ...previous, [name]: "" }));
   // };
-  console.log(formValues);
 
   const handleDrop = (event) => {
     event.preventDefault();
