@@ -32,7 +32,7 @@ export const Footer = ({ handleSubmit, handlePrevious, step, steps }) => {
             onClick={handleSubmit}
           >
             Continue {step + 1} / {steps - 1}
-            <img src="vector (3).png" alt="" className="ml-[5px] h-3 w-2" />
+            <img src="/vector (3).png" alt="" className="ml-[5px] h-3 w-2" />
           </button>
         )}
       </div>
