@@ -6,7 +6,7 @@ export const Header = () => {
       <div>
         <img src="/Pineconelogo.png" alt="" className="h-[60px] w-[60px]" />
       </div>
-      <div className="text-[26px] font-semibold  text-shadow-[0px_4px_4px_gray]">
+      <div className="text-[26px] font-semibold text-black text-shadow-[0px_4px_4px_gray]">
         Join Us! 😎
       </div>
       <div className="text-[18px] text-[#8E8E8E]">
